@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
-import AuthContext from "../context/AuthContext";
+import AuthContext, { Auth } from "../context/AuthContext";
 
 const RegisterPage = () => {
-  const {registerUser} = useContext(AuthContext);
+  const  registerUser  = useContext(Auth);
 
   const {
     handleSubmit,
@@ -13,7 +13,8 @@ const RegisterPage = () => {
   } = useForm();
 
   const submitHandler = (data) => {
-    const response = registerUser(data)
+    
+     registerUser(data)
   };
 
   return (

@@ -1,6 +1,6 @@
 import React, { createContext } from "react";
 
-export const AuthContextData = createContext();
+export const Auth = createContext();
 
  const AuthContext = ({ children }) => {
   const registerUser = (newUser) => {
@@ -27,9 +27,9 @@ export const AuthContextData = createContext();
   };
 
   return (
-    <AuthContextData.Provider value={{registerUser}}>
-      {children}
-    </AuthContextData.Provider>
+  <Auth.Provider value={registerUser}>
+    {children}
+  </Auth.Provider>
   );
 };
 
