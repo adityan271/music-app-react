@@ -1,6 +1,21 @@
-import React from "react";
+import React, { useContext } from "react";
+import { useForm } from "react-hook-form";
+import AuthContext from "../context/AuthContext";
 
 const RegisterPage = () => {
+  const {registerUser} = useContext(AuthContext);
+
+  const {
+    handleSubmit,
+    register,
+    formState: { errors },
+    reset,
+  } = useForm();
+
+  const submitHandler = (data) => {
+    const response = registerUser(data)
+  };
+
   return (
     <div className="relative flex min-h-screen items-center justify-center overflow-hidden bg-[#2b4d5f] px-4 py-10">
       {/* Ambient Background */}
@@ -32,13 +47,14 @@ const RegisterPage = () => {
           </h2>
 
           {/* Form */}
-          <form className="space-y-5">
+          <form onSubmit={handleSubmit(submitHandler)} className="space-y-5">
             <div>
               <label className="mb-2 block text-sm font-medium text-[#c4d0d6]">
                 Full Name
               </label>
 
               <input
+                {...register("fullName")}
                 type="text"
                 placeholder="Enter your full name"
                 className="w-full rounded-xl border border-[#315d70] bg-[#102d3b] px-4 py-3.5 text-sm text-[#c4d0d6] outline-none transition placeholder:text-[#668a9c] focus:border-[#349bd7] focus:ring-2 focus:ring-[#349bd7]/20"
@@ -51,6 +67,7 @@ const RegisterPage = () => {
               </label>
 
               <input
+                {...register("username")}
                 type="text"
                 placeholder="@username"
                 className="w-full rounded-xl border border-[#315d70] bg-[#102d3b] px-4 py-3.5 text-sm text-[#c4d0d6] outline-none transition placeholder:text-[#668a9c] focus:border-[#349bd7] focus:ring-2 focus:ring-[#349bd7]/20"
@@ -63,6 +80,7 @@ const RegisterPage = () => {
               </label>
 
               <input
+                {...register("email")}
                 type="email"
                 placeholder="Enter your email address"
                 className="w-full rounded-xl border border-[#315d70] bg-[#102d3b] px-4 py-3.5 text-sm text-[#c4d0d6] outline-none transition placeholder:text-[#668a9c] focus:border-[#349bd7] focus:ring-2 focus:ring-[#349bd7]/20"
@@ -75,6 +93,7 @@ const RegisterPage = () => {
               </label>
 
               <input
+                {...register("password")}
                 type="password"
                 placeholder="Create a strong password"
                 className="w-full rounded-xl border border-[#315d70] bg-[#102d3b] px-4 py-3.5 text-sm text-[#c4d0d6] outline-none transition placeholder:text-[#668a9c] focus:border-[#349bd7] focus:ring-2 focus:ring-[#349bd7]/20"
