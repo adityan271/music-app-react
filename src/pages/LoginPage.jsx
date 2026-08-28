@@ -10,7 +10,7 @@ const LoginPage = () => {
     console.log(data)
 
     reset();
-    // navigate("/");
+    navigate("/");
   };
 
   return (
