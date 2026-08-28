@@ -8,7 +8,10 @@ const RegisterPage = () => {
 
   const registerUser = useContext(Auth);
 
-  const { handleSubmit, register, reset } = useForm();
+  const { handleSubmit, register, reset, setValue, watch } = useForm();
+
+  const role = watch("role");
+  console.log(role);
 
   const submitHandler = (data) => {
     const response = registerUser(data);
@@ -57,8 +60,13 @@ const RegisterPage = () => {
           <div className="mb-4 grid grid-cols-2 gap-2">
             {/* Listener */}
             <button
+              onClick={() => setValue("role", "listner")}
               type="button"
-              className={`rounded-xl border px-3 py-2.5 transition-all duration-150 active:scale-95 active:translate-y-0.5 ${"border-[#48a8df] bg-[#1d536c]"}`}
+              className={`rounded-xl border px-3 py-2.5 transition-all duration-150 active:scale-95 active:translate-y-0.5 ${
+                role === "artist"
+                  ? "border-[#315d70] bg-[#102d3b]"
+                  : "border-[#48a8df] bg-[#1d536c]"
+              } `}
             >
               <span className="mr-1">🎧</span>
 
@@ -71,8 +79,13 @@ const RegisterPage = () => {
 
             {/* Artist */}
             <button
+              onClick={() => setValue("role", "artist")}
               type="button"
-              className={`rounded-xl border px-3 py-2.5 transition-all duration-150 active:scale-95 active:translate-y-0.5 ${"border-[#48a8df] bg-[#1d536c]"}`}
+              className={`rounded-xl border px-3 py-2.5 transition-all duration-150 active:scale-95 active:translate-y-0.5 ${
+                role === "artist"
+                  ? "border-[#48a8df] bg-[#1d536c]"
+                  : "border-[#315d70] bg-[#102d3b]"
+              }`}
             >
               <span className="mr-1">🎤</span>
 
@@ -83,6 +96,7 @@ const RegisterPage = () => {
               <p className="mt-0.5 text-[9px] text-[#91a8b5]">Share music</p>
             </button>
           </div>
+          <input type="hidden" {...register("role")} />
 
           {/* Form */}
           <form onSubmit={handleSubmit(submitHandler)} className="space-y-2.5">
