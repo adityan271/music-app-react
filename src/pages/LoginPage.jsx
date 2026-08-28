@@ -1,6 +1,18 @@
 import React from "react";
+import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router";
 
 const LoginPage = () => {
+
+   const { handleSubmit, register, reset, setValue, watch } = useForm();
+    const navigate = useNavigate();
+   const submitHandler = (data) => {
+    console.log(data)
+
+    reset();
+    // navigate("/");
+  };
+
   return (
     <div className="relative flex min-h-screen items-center justify-center overflow-hidden bg-[#2b4d5f] px-4 py-10">
       {/* Ambient Background */}
@@ -32,13 +44,14 @@ const LoginPage = () => {
           </h2>
 
           {/* Form */}
-          <form className="space-y-6">
+          <form onClick={handleSubmit(submitHandler)} className="space-y-6">
             <div>
               <label className="mb-2 block text-sm font-medium text-[#c4d0d6]">
                 Email Address
               </label>
 
               <input
+              {...register('email')}
                 type="email"
                 placeholder="Enter your email address"
                 className="w-full rounded-xl border border-[#315d70] bg-[#102d3b] px-4 py-3.5 text-sm text-[#c4d0d6] outline-none transition placeholder:text-[#668a9c] focus:border-[#349bd7] focus:ring-2 focus:ring-[#349bd7]/20"
@@ -51,6 +64,7 @@ const LoginPage = () => {
               </label>
 
               <input
+              {...register('password')}
                 type="password"
                 placeholder="Enter your password"
                 className="w-full rounded-xl border border-[#315d70] bg-[#102d3b] px-4 py-3.5 text-sm text-[#c4d0d6] outline-none transition placeholder:text-[#668a9c] focus:border-[#349bd7] focus:ring-2 focus:ring-[#349bd7]/20"
